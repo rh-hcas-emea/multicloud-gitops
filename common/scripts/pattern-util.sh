@@ -20,18 +20,23 @@ done
 
 # We must pass -e KUBECONFIG *only* if it is set, otherwise we end up passing
 # KUBECONFIG="" which then will confuse ansible
-KUBECONF_ENV=""
-if [ -n "$KUBECONFIG" ]; then
-	KUBECONF_ENV="-e KUBECONFIG=${KUBECONFIG}"
+#KUBECONF_ENV=""
+#if [ -n "$KUBECONFIG" ]; then
+#	KUBECONF_ENV="-e KUBECONFIG=${KUBECONFIG}"
+#fi
+#
+if [ -z "$KUBECONFIG" ]; then
+  KUBECONFIG="$HOME/.kube/config"
 fi
+
+PATTERN="$(basename $PWD)"
+WORK_DIR="/pattern-home/$PATTERN"
 
 podman run -it \
 	--security-opt label=disable \
-	${KUBECONF_ENV} \
 	${SSH_SOCK_MOUNTS} \
-	-v ${HOME}:${HOME} \
-	-v ${HOME}:/pattern-home \
-	-v ${HOME}:/root \
-	-w $(pwd) \
+        -v "$KUBECONFIG:/pattern-home/.kube/config" \
+	-v .:$WORK_DIR \
+	-w $WORK_DIR \
 	"$PATTERN_UTILITY_CONTAINER" \
 	$@
