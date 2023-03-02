@@ -74,10 +74,10 @@ clusterGroup:
 
   managedClusterGroups:
     exampleRegion:
-      name: group-one
+      name: demo-gitops-cicd
       acmlabels:
       - name: clusterGroup
-        value: group-one
+        value: demo-gitops-cicd
       helmOverrides:
       - name: clusterGroup.isHubCluster
         value: false
