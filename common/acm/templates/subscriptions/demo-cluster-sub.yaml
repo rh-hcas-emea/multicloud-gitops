@@ -2,7 +2,7 @@ apiVersion: app.k8s.io/v1beta1
 kind: Application
 metadata:
   name: demo-cicd-setup
-  namespace: default
+  namespace: openshift-gitops
 spec:
   componentKinds:
   - group: apps.open-cluster-management.io
@@ -41,7 +41,7 @@ metadata:
   labels:
     app: demo-cicd-setup
   name: demo-cicd-setup-subscription-1
-  namespace: default
+  namespace: openshift-gitops
 spec:
   allow:
   - apiVersion: argoproj.io/v1alpha1
@@ -59,7 +59,7 @@ metadata:
   labels:
     app: demo-cicd-setup
   name: demo-cicd-setup-placement-1
-  namespace: default
+  namespace: openshift-gitops
 spec:
   clusterSelector:
     matchLabels:
