@@ -61,6 +61,7 @@ spec:
         cpu: 500m
         memory: 2Gi
   sso:
+    provider: dex
     dex:
       openShiftOAuth: true
       resources:
